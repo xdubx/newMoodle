@@ -1,0 +1,26 @@
+document.addEventListener("DOMContentLoaded", function(event) { 
+  insertBtn();
+});
+function insertBtn(){
+
+
+	var btn = document.createElement("div");              
+	btn.innerHTML = "<button onClick = 'loadNewStyle()'>Change</button>";    
+	document.getElementsByClassName("container-fluid")[0].appendChild(btn);
+}
+
+function loadNewStyle(){
+	
+	var backupDiv = document.createElement('div');
+	/*document.body.childNodes.forEach(function(entry) {
+    	backupDiv.appendChild(entry);
+	});
+	*/
+	// Clear body and load new html
+	var newSide = document.createElement('iframe');
+	newSide.src = 'file://D:/Studi/html/newMoodle/index.html';
+	newSide.style = 'position: absolute; top: 0px; bottom: 0px;left: 0px;right: 0px;z-index: 9999;width: 100%;height: 100%;';
+	document.body.appendChild(newSide);
+}
+
+// Search for Cookie if style is changed and set iframe as overlay
