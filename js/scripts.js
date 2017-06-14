@@ -1,7 +1,7 @@
 // knockout load course_list
 function AppViewModel() {
     this.username = $("span.usertext", top.document).text();
-	this.logout = $(".logininfo",top.document).find("a")[1].attr("href");
+	this.logout = getLogout();
 	var couse = ko.observableArray([]);
 	var couse1 = $('.coursebox', top.document);
 	//console.warn(couse1);
@@ -17,7 +17,6 @@ function AppViewModel() {
 		}
 		
 	}, this);
-	
 	this.couses = couse;
 }
 // Activates knockout.js
@@ -95,33 +94,9 @@ function httpGet(theUrl){
     return xmlHttp.responseText;
 }
 function downloadFolder(url, name){
-	//TODO 
 	var place = url.search("id");
 	var idFromUrl = url.substr(place+3,url.length)
 	var formData = {id: idFromUrl};
-	/*// Data to post
-    data = {
-        id: [idFromUrl]
-    };
-
-    // Use XMLHttpRequest instead of Jquery $ajax
-    xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        var a;
-        if (xhttp.readyState === 4 && xhttp.status === 200) {
-           
-        }
-    };
-    // Post data to URL which handles post request
-    xhttp.open("POST", excelDownloadUrl);
-    xhttp.setRequestHeader("Content-Type", "application/json");
-    // You should set responseType as blob for binary responses
-    xhttp.responseType = 'blob';
-    xhttp.send(JSON.stringify(result));
-	
-	*/
-	
-	console.warn(formData);
 	$.ajax({
     url : "https://moodle.mosbach.dhbw.de/mod/folder/download_folder.php",
     type: "POST",
@@ -144,5 +119,14 @@ function downloadFolder(url, name){
     error: function (textStatus){
 		console.warn(textStatus);
 	}
+	});
+}
+function getLogout(){
+	var searchlogout = $(".logininfo",top.document).find("a");
+	searchlogout.children().each(function(){
+		var elem = $(this);
+		if(elem.attr("href").includes("logout")){
+			return elem.attr("href");
+		}
 	});
 }
