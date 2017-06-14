@@ -42,16 +42,41 @@ $( document ).ready( function() {
 	//remove change button | remove accesshide text
 	$("#changeStyle").remove();
 	$(".accesshide").remove();
+	$("#loadingAnimation").remove();
 	//remove buggy list style
 	$(".topics").css("list-style", "none");
+	$(".left.side").remove();
 	var selection = $(".section .img-text");
 	selection.css("list-style","none");
 	selection.css("padding-left","0px");
 	var containerDesc= $(".contentafterlink");
 	containerDesc.css("margin-top","15px");
 	containerDesc.css("margin-bottom","25px");
+	// add new icons
+	var iconsActivity = $('.iconlarge.activityicon');
+	iconsActivity.each(function(){
+			var parent = $(this).parent();
+			parent.css("cursor","pointer");
+			var text = parent.find("span").text();
+			var css = "";
+			var href = $(this).attr('src');
+			if(href.includes('forum')){
+				css = "glyphicon glyphicon-comment text-success";
+			}else if(href.includes('archive')){
+				css = "glyphicon glyphicon-compressed text-muted";
+			}else if(href.includes('pdf')){
+				css = "glyphicon glyphicon-file text-danger";
+			}else if(href.includes('sourcecode')){
+				css = "glyphicon glyphicon-cog text-muted";
+			}else if(href.includes('folder')){
+				css = "glyphicon glyphicon-folder-open text-danger";
+			}
+			parent.children().remove();
+			parent.append("<span><i class='"+css+"'></i> "+text+"</span>");
+		}
+	)
 	// remove a href from h3 content  !! dont remove from ankündigungen but load it to new tab <---
-	$(".content").find('a').removeAttr("href");
+	//$(".content").find('a').removeAttr("href");
 });
 
 
