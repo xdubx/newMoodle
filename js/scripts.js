@@ -33,7 +33,7 @@ function AppViewModel() {
 	}, this);
 	
 	this.couses = couse;
-    this.lastName = "Bertin";
+    this.logout = $(".logininfo").find("a").attr("href");
 }
 // Activates knockout.js
 $( document ).ready( function() {
