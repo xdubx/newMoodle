@@ -21,6 +21,10 @@
 <!-- header -->
 	</head>
 	<body>
+        <div id="loadingAnimation" style="position:fixed;left:0px;right:0px;top:0px;bottom:0px;z-index:1001;background:white;">
+            <div style="display:block;text-align:center;"><img style="width:200px;" src="https://localhost/newMoodle/pic/moodle.png"><img style="width:150px" src="https://localhost/newMoodle/pic/dh.png"></div>
+            <img style="display:block;margin:auto;" src="https://localhost/newMoodle/pic/hex-loader2.gif">
+        </div>
 <div id="top-nav" class="navbar navbar-inverse navbar-static-top">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -42,7 +46,7 @@
                         <li><a href="#">Einstellungen</a></li>
                     </ul>
                 </li>
-                <li><a data-bind="attr: { 'href': logout}"><i class="glyphicon glyphicon-lock"></i> Logout</a></li>
+                <li><a data-bind="attr: { href: logout }"><i class="glyphicon glyphicon-lock"></i> Logout</a></li>
             </ul>
         </div>
     </div>
@@ -124,7 +128,6 @@
             <div class="row">
                 
                 <div class="col-md-12">
-                    <img id="loadingAnimation"src="https://localhost/newMoodle/pic/ounq1mw5kdxy.gif">
                     <!--
                     <div class="well">Inbox Messages <span class="badge pull-right">3</span></div>
 

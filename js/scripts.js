@@ -1,21 +1,7 @@
-
-/* swap open/close side menu icons */
-$('[data-toggle=collapse]').click(function(){
-  	// toggle icon
-  	$(this).find("i").toggleClass("glyphicon-chevron-right glyphicon-chevron-down");
-});
-
-/*
-function getCourses(){
-	var moodle =  $('#page', window.parent.document);
-	var couse = $('.course_list', top.document);
-	console.warn(couse);
-	$('.usertext', window.parent.document).text;
-}*/
-
 // knockout load course_list
 function AppViewModel() {
     this.username = $("span.usertext", top.document).text();
+	this.logout = $(".logininfo",top.document).find("a")[1].attr("href");
 	var couse = ko.observableArray([]);
 	var couse1 = $('.coursebox', top.document);
 	//console.warn(couse1);
@@ -33,7 +19,6 @@ function AppViewModel() {
 	}, this);
 	
 	this.couses = couse;
-    this.logout = $(".logininfo").find("a").attr("href");
 }
 // Activates knockout.js
 $( document ).ready( function() {
@@ -69,12 +54,21 @@ $( document ).ready( function() {
 			}else if(href.includes('sourcecode')){
 				css = "glyphicon glyphicon-cog text-muted";
 			}else if(href.includes('folder')){
-				css = "glyphicon glyphicon-folder-open text-danger";
+				css = "glyphicon glyphicon-folder-open text-warning";
+				var link = parent.attr('href');
+				parent.attr('onClick','downloadFolder("'+link+'","'+text+'")');
+				parent.removeAttr("href");
 			}
 			parent.children().remove();
 			parent.append("<span><i class='"+css+"'></i> "+text+"</span>");
 		}
 	)
+
+	/* swap open/close side menu icons */
+	$('[data-toggle=collapse]').click(function(){
+		// toggle icon
+		$(this).find("i").toggleClass("glyphicon-chevron-right glyphicon-chevron-down");
+	});
 	// remove a href from h3 content  !! dont remove from ankündigungen but load it to new tab <---
 	//$(".content").find('a').removeAttr("href");
 });
@@ -94,13 +88,61 @@ function searchForContent(url){
 	//console.warn();
 	return html;
 }
-function httpGet(theUrl)
-{
+function httpGet(theUrl){
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
     xmlHttp.send( null );
     return xmlHttp.responseText;
 }
-function FindAndCountDiv(html){
+function downloadFolder(url, name){
+	//TODO 
+	var place = url.search("id");
+	var idFromUrl = url.substr(place+3,url.length)
+	var formData = {id: idFromUrl};
+	/*// Data to post
+    data = {
+        id: [idFromUrl]
+    };
+
+    // Use XMLHttpRequest instead of Jquery $ajax
+    xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        var a;
+        if (xhttp.readyState === 4 && xhttp.status === 200) {
+           
+        }
+    };
+    // Post data to URL which handles post request
+    xhttp.open("POST", excelDownloadUrl);
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    // You should set responseType as blob for binary responses
+    xhttp.responseType = 'blob';
+    xhttp.send(JSON.stringify(result));
 	
+	*/
+	
+	console.warn(formData);
+	$.ajax({
+    url : "https://moodle.mosbach.dhbw.de/mod/folder/download_folder.php",
+    type: "POST",
+    data : formData,
+	xhrFields: {
+    	responseType: 'blob'
+  	},
+    success: function(blob){
+            a = document.createElement('a');
+            a.href = window.URL.createObjectURL(blob);
+            // Give filename you wish to download
+            a.download = name+".zip";
+            a.style.display = 'none';
+            document.body.appendChild(a);
+            a.click();
+			a.remove();
+		
+        //console.warn("t:" + textStatus);
+    },
+    error: function (textStatus){
+		console.warn(textStatus);
+	}
+	});
 }
