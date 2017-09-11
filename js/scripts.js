@@ -7,16 +7,20 @@ function AppViewModel() {
 	//console.warn(couse1);
 	couse1.children().each(function() {
 		var title = $(this).find('a');
-		if(title.text() != ""){
+		if(title === undefined){
+			return;
+		}
+		if(title.text() != "" && title.attr('href') != "#"){
+			
 			var task = $(this).find('.activity_overview');
-			var data = {"header": "<h4>"+title.text()+"</h4></a>",
+			var data = {"header": "<h4>"+title.text() +"</h4></a>",
 						"content": searchForContent(title.attr('href')),
-						"task": task.html()
+						"href": title.attr('href')
 						};
 			couse.push(data);
 		}
-		
 	}, this);
+	saveCouses(couse);
 	this.couses = couse;
 }
 // Activates knockout.js
@@ -48,11 +52,17 @@ $( document ).ready( function() {
 				css = "glyphicon glyphicon-comment text-success";
 			}else if(href.includes('archive')){
 				css = "glyphicon glyphicon-compressed text-muted";
+			}else if(href.includes('powerpoint')){
+				css = "glyphicon glyphicon-blackboard text-danger";
+			}else if(href.includes('document')){
+				css = "glyphicon glyphicon-duplicate text-primary";
+			}else if(href.includes('icon')){
+				css = "glyphicon glyphicon-wrench text-muted";
 			}else if(href.includes('pdf')){
 				css = "glyphicon glyphicon-file text-danger";
 			}else if(href.includes('sourcecode')){
 				css = "glyphicon glyphicon-cog text-muted";
-			}else if(href.includes('folder')){
+			}else if(href.includes('1497445414')){
 				css = "glyphicon glyphicon-folder-open text-warning";
 				var link = parent.attr('href');
 				parent.attr('onClick','downloadFolder("'+link+'","'+text+'")');
@@ -129,4 +139,13 @@ function getLogout(){
 			return elem.attr("href");
 		}
 	});
+}
+function saveCouses(couse){
+	var data = {COURSES: couse};
+    localStorage.setItem("DATA", JSON.stringify(data));
+}
+function fetchCouses(){
+	this.couses.forEach(function(element) {
+		element.content = searchForContent(element.href);
+	}, this);
 }

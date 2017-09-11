@@ -11,7 +11,6 @@ function insertBtn(){
 }
 
 function loadNewStyle(){
-	
 	var backupDiv = document.createElement('div');
 	document.body.childNodes.forEach(function(entry) {
 //	backupDiv.appendChild(entry);
@@ -23,7 +22,6 @@ function loadNewStyle(){
         void(document.styleSheets.item(i).disabled=true);
     }
 
-
 	// Clear body and load new html
 	var newSide = document.createElement('iframe');
     newSide.setAttribute("id", "test");
@@ -34,14 +32,6 @@ var doc = document.getElementById('test').contentWindow.document;
 doc.open();
 doc.write(httpGet('https://localhost/newMoodle/index.html'));
 doc.close();
-
-
-//    setTimeout(loadjscssfile("https://localhost/newMoodle/js/jquery-3.2.1.min.js", "js"), 2000);
-//    setTimeout(loadjscssfile("https://localhost/newMoodle/js/scripts.js", "js"), 5000);
-
-//	setTimeout(loadjscssfile("https://localhost/newMoodle/js/knockout-3.4.2.js", "js"), 3000);
-//    setTimeout(loadjscssfile("https://localhost/newMoodle/js/bootstrap.min.js", "js"), 3000);
-   
 
     //css loading in html
   

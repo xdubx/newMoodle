@@ -40,10 +40,7 @@
                 <li class="dropdown">
                     <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#"><i class="glyphicon glyphicon-user"></i> <span data-bind="text: username">Name Placeholder</span> <span class="caret"></span></a>
                     <ul id="g-account-menu" class="dropdown-menu" role="menu">
-                        <li><a href="#">My Profile</a></li>
-                        <li><a href="#">Bewertungen</a></li>
                         <li><a href="#">Mitteilungen</a></li>
-                        <li><a href="#">Einstellungen</a></li>
                     </ul>
                 </li>
                 <li><a data-bind="attr: { href: logout }"><i class="glyphicon glyphicon-lock"></i> Logout</a></li>
@@ -84,7 +81,7 @@
                     </ul>
                 </li>-->
                 <li class="nav-header">
-                    <a href="#" data-toggle="collapse" data-target="#menu3"> Kontakt <i class="glyphicon glyphicon-chevron-down"></i></a>
+                    <a href="#" data-toggle="collapse" data-target="#menu3"> Kontakt <i class="glyphicon glyphicon-chevron-right"></i></a>
                     <ul class="nav nav-stacked collapse" id="menu3">
                         <li><a href="mailto: moodle@dhbw-mosbach.de"><i class="glyphicon glyphicon-circle"></i> E-Mail</a></li>
                         <li><a href="http://esc.mosbach.dhbw.de/" target="_new"><i class="glyphicon glyphicon-circle"></i> Homepage</a></li>
@@ -122,7 +119,7 @@
                 <li><a title="Add Widget" data-toggle="modal" href="#addWidgetModal"><span class="glyphicon glyphicon-plus-sign"></span> Add Widget</a></li>
             </ul>
             -->
-            <a href="#"><strong><i class="glyphicon glyphicon-dashboard"></i> Dashboard</strong></a>
+            <a href="#"><strong><i class="glyphicon glyphicon-dashboard"></i> Dashboard</strong></a> <i class="glyphicon glyphicon-repeat pull-right" style="cursor: pointer;" onclick="fetchCouses()"></i>
             <hr>
 
             <div class="row">
