@@ -27,7 +27,7 @@ function AppViewModel() {
 $( document ).ready( function() {
 	ko.applyBindings(new AppViewModel());
 	// now update the moodle style
-	//remove change button | remove accesshide text
+	//remove change button | remove access hide text
 	$("#changeStyle").remove();
 	$(".accesshide").remove();
 	$("#loadingAnimation").remove();
@@ -148,4 +148,13 @@ function fetchCouses(){
 	this.couses.forEach(function(element) {
 		element.content = searchForContent(element.href);
 	}, this);
+}
+function saveCookie(){
+
+}
+function clearMainPage(){
+	// get parnet container from iframe 
+	var parent; 
+	// clear the content in the parent body -> ignore iframe
+	
 }
